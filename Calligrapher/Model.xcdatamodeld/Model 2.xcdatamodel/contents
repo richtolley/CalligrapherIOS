@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Manuscript" representedClassName="Manuscript" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="lastEditDate" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="Untitled MS" indexed="YES" syncable="YES"/>
+        <attribute name="thumbnailImage" optional="YES" attributeType="Transformable" valueTransformerName="CCUIImageTransformer" syncable="YES"/>
+        <relationship name="script" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Script" inverseName="manuscript" inverseEntity="Script" syncable="YES"/>
+    </entity>
+    <entity name="Script" representedClassName="Script" syncable="YES">
+        <attribute name="paperColorVal" optional="YES" attributeType="Transformable" valueTransformerName="CCUIColorRGBTransformer" syncable="YES"/>
+        <relationship name="manuscript" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Manuscript" inverseName="script" inverseEntity="Manuscript" syncable="YES"/>
+        <relationship name="strokes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Stroke" inverseName="manuscript" inverseEntity="Stroke" syncable="YES"/>
+    </entity>
+    <entity name="Stroke" representedClassName="Stroke" syncable="YES">
+        <attribute name="inkColorVal" optional="YES" attributeType="Transformable" valueTransformerName="CCUIColorRGBTransformer" syncable="YES"/>
+        <relationship name="manuscript" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Script" inverseName="strokes" inverseEntity="Script" syncable="YES"/>
+        <relationship name="points" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="StrokePoint" inverseName="stroke" inverseEntity="StrokePoint" syncable="YES"/>
+    </entity>
+    <entity name="StrokePoint" representedClassName="StrokePoint" syncable="YES">
+        <attribute name="nibAngle" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="nibWidth" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="pointX" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="pointY" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="stroke" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Stroke" inverseName="points" inverseEntity="Stroke" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Script" positionX="-65" positionY="-45" width="173" height="90"/>
+        <element name="Stroke" positionX="169" positionY="27" width="128" height="90"/>
+        <element name="StrokePoint" positionX="160" positionY="189" width="128" height="120"/>
+        <element name="Manuscript" positionX="-279" positionY="-42" width="128" height="120"/>
+    </elements>
+</model>

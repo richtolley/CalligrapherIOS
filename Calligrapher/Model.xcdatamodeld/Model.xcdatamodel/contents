@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Manuscript" representedClassName="Manuscript" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="hasBeenSaved" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="lastEditDate" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="Untitled MS" indexed="YES" syncable="YES"/>
+        <attribute name="paperColorVal" attributeType="Transformable" valueTransformerName="CCUIColorRGBTransformer" syncable="YES"/>
+        <attribute name="thumbnailImage" optional="YES" attributeType="Transformable" valueTransformerName="CCUIImageTransformer" syncable="YES"/>
+        <relationship name="page" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Page" inverseName="manuscript" inverseEntity="Page" syncable="YES"/>
+        <relationship name="strokes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Stroke" inverseName="manuscript" inverseEntity="Stroke" syncable="YES"/>
+    </entity>
+    <entity name="Page" representedClassName="Page" syncable="YES">
+        <attribute name="bottomMargin" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="height" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="leftMargin" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lineSpacing" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="nibWidth" attributeType="Double" minValueString="1" maxValueString="50" defaultValueString="30" syncable="YES"/>
+        <attribute name="rightMargin" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="topMargin" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="width" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="manuscript" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Manuscript" inverseName="page" inverseEntity="Manuscript" syncable="YES"/>
+    </entity>
+    <entity name="Stroke" representedClassName="Stroke" syncable="YES">
+        <attribute name="inkColorVal" optional="YES" attributeType="Transformable" valueTransformerName="CCUIColorRGBTransformer" syncable="YES"/>
+        <attribute name="sequence" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="manuscript" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Manuscript" inverseName="strokes" inverseEntity="Manuscript" syncable="YES"/>
+        <relationship name="quads" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StrokeQuad" inverseName="stroke" inverseEntity="StrokeQuad" syncable="YES"/>
+    </entity>
+    <entity name="StrokeQuad" representedClassName="StrokeQuad" syncable="YES">
+        <attribute name="nibAngle" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="nibWidth" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="point1X" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="point1Y" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="point2X" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="point2Y" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sequence" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="stroke" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Stroke" inverseName="quads" inverseEntity="Stroke" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Manuscript" positionX="-54" positionY="-0" width="128" height="165"/>
+        <element name="Page" positionX="-272" positionY="9" width="128" height="180"/>
+        <element name="Stroke" positionX="153" positionY="-0" width="128" height="105"/>
+        <element name="StrokeQuad" positionX="342" positionY="81" width="128" height="165"/>
+    </elements>
+</model>
